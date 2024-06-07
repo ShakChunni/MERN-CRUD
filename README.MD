@@ -47,3 +47,7 @@ To clone the GitHub repository, use the following command:
    - On the dashboard, you can view and manage your profile information.
    - Update your profession, interests, and bio as needed.
    - You can also delete your profile from the dashboard.
+
+## Credits
+
+This project was created as part of a coding challenge provvided by Reply Mind AI.
