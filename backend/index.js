@@ -71,11 +71,17 @@ app.get("/userinfo", async (req, res) => {
 app.post("/updateinfo", async (req, res) => {
   const { username, profession, interests, bio } = req.body;
   try {
-    const user = await UserModel.findOneAndUpdate(
-      { username },
-      { profession, interests, bio },
-      { new: true }
-    );
+    const updateData = {};
+    if (profession !== undefined && interests !== undefined) {
+      updateData.profession = profession;
+      updateData.interests = interests;
+    }
+    if (bio !== undefined) {
+      updateData.bio = bio;
+    }
+    const user = await UserModel.findOneAndUpdate({ username }, updateData, {
+      new: true,
+    });
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -83,13 +89,18 @@ app.post("/updateinfo", async (req, res) => {
 });
 
 app.post("/deleteinfo", async (req, res) => {
-  const { username } = req.body;
+  const { username, type } = req.body;
   try {
-    const user = await UserModel.findOneAndUpdate(
-      { username },
-      { profession: "", interests: [], bio: "" },
-      { new: true }
-    );
+    const updateData = {};
+    if (type === "profession") {
+      updateData.profession = "";
+      updateData.interests = [];
+    } else if (type === "bio") {
+      updateData.bio = "";
+    }
+    const user = await UserModel.findOneAndUpdate({ username }, updateData, {
+      new: true,
+    });
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
