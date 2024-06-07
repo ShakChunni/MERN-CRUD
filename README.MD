@@ -33,6 +33,10 @@ To clone the GitHub repository, use the following command:
 
 ## Usage
 
+   **Test Credentials**:
+   - Username: test
+   - Password: password
+
 1. **Registration**:
    - Open the application in your browser.
    - Navigate to the registration page and fill out the registration form.
