@@ -17,18 +17,18 @@ const UserSchema = new mongoose.Schema({
   },
   profession: {
     type: String,
-    default: "", // Set default value to an empty string
+    default: "",
   },
   interests: [
     {
       type: String,
-      default: [], // Set default value to an empty array
+      default: [],
     },
   ],
   bio: {
     type: String,
     maxlength: 50,
-    default: "", // Set default value to an empty string
+    default: "",
   },
 });
 

@@ -22,6 +22,7 @@ function Login() {
         password,
       });
       console.log(response.data);
+      localStorage.setItem("username", username); // Store username in localStorage
       navigate("/dashboard"); 
     } catch (error) {
       console.log(error);
