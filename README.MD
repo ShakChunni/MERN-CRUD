@@ -11,8 +11,8 @@ This is a simple full-stack CRUD application where users can register, login, an
 
 ## Technologies Used
 
-- **Frontend**: React.js
-- **Backend**: Node.js, Express.js
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js, Axios
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
