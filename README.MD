@@ -11,8 +11,8 @@ This is a simple full-stack CRUD application where users can register, login, an
 
 ## Technologies Used
 
-- **Frontend**: React.js
-- **Backend**: Node.js, Express.js
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js, Axios
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
@@ -24,18 +24,18 @@ To clone the GitHub repository, use the following command:
 1. **Backend Setup**:
    - Navigate to the `backend` directory: `cd backend`
    - Install dependencies: `npm install`
-   - Start the backend server: `npm run dev`
+   - Start the backend server: `npm start dev`
 
 2. **Frontend Setup**:
    - Navigate to the `frontend` directory: `cd frontend`
    - Install dependencies: `npm install`
-   - Start the frontend server: `npm start`
+   - Start the frontend server: `npm run dev`
 
 ## Usage
 
    **Test Credentials**:
    - Username: test
-   - Password: password
+   - Password: test
 
 1. **Registration**:
    - Open the application in your browser.
