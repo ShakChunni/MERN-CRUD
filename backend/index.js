@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
@@ -11,9 +12,48 @@ mongoose.connect(
 );
 
 app.post("/signup", async (req, res) => {
-  UserModel.create(req.body)
-    .then((user) => res.json(user))
-    .catch((err) => res.json(err));
+  try {
+    const { username, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await UserModel.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (passwordMatch) {
+      res.json(user);
+    } else {
+      res.status(401).json({ error: "Invalid credentials" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/userinfo", async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ username: req.query.username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.listen(5000, () => {

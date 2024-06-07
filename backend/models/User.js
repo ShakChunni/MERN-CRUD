@@ -15,7 +15,22 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profession: {
+    type: String,
+    default: "", // Set default value to an empty string
+  },
+  interests: [
+    {
+      type: String,
+      default: [], // Set default value to an empty array
+    },
+  ],
+  bio: {
+    type: String,
+    maxlength: 50,
+    default: "", // Set default value to an empty string
+  },
 });
 
-const UserModel = mongoose.model("userTable", UserSchema);
+const UserModel = mongoose.model("extrordinary", UserSchema);
 module.exports = UserModel;

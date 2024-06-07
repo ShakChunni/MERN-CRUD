@@ -2,8 +2,9 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./index.css";
-import Signup from "./auth/signup";
-import Login from "./auth/login";
+import Signup from "./pages/signup";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
