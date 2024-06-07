@@ -18,8 +18,14 @@ function Signup() {
     e.preventDefault();
     axios
       .post("http://localhost:5000/signup", { username, email, password })
-      .then((result) => console.log(result));
-    navigate("/login");
+      .then((result) => {
+        console.log(result);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignupError("Signup failed. Please try again.");
+      });
   };
 
   return (
