@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-  const [username, setUsername] = useState(""); // Changed email to username
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -18,13 +18,14 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/login", {
-        username, // Changed email to username
+        username,
         password,
       });
       console.log(response.data);
-      localStorage.setItem("username", username); // Store username in localStorage
-      navigate("/dashboard"); 
+      localStorage.setItem("username", username);
+      navigate("/dashboard");
     } catch (error) {
+      setLoginError("Login failed. Please check your username and password.");
       console.log(error);
     }
   };
@@ -40,8 +41,8 @@ function Login() {
               Username
             </label>
             <input
-              type="text" 
-              id="username" 
+              type="text"
+              id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required

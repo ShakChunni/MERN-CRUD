@@ -50,11 +50,16 @@ function Dashboard() {
       })
       .then((response) => {
         setUserInfo(response.data);
+        // Clear newInterests if newProfession changes
+        if (newProfession !== response.data.profession) {
+          setNewInterests([]);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [newProfession]); // Listen for changes in newProfession
+  
 
   const handleUpdate = () => {
     const username = localStorage.getItem("username");
@@ -105,10 +110,14 @@ function Dashboard() {
 
   const openModal = (type) => {
     setModalType(type);
-    setNewProfession(userInfo.profession);
-    setNewInterests(userInfo.interests);
-    setNewBio(userInfo.bio);
-    setBioLength(userInfo.bio.length);
+    if (type === "profession") {
+      setNewProfession(userInfo.profession);
+      // Set interests to the user's existing interests
+      setNewInterests(userInfo.interests);
+    } else {
+      setNewBio(userInfo.bio);
+      setBioLength(userInfo.bio.length);
+    }
     setIsModalOpen(true);
   };
 
@@ -118,7 +127,7 @@ function Dashboard() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-6xl">
+      <div className="bg-white p-8 rounded-lg w-full">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
           <button

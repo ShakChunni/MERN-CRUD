@@ -56,18 +56,6 @@ app.get("/userinfo", async (req, res) => {
   }
 });
 
-app.get("/userinfo", async (req, res) => {
-  try {
-    const user = await UserModel.findOne({ username: req.query.username });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
 app.post("/updateinfo", async (req, res) => {
   const { username, profession, interests, bio } = req.body;
   try {
@@ -78,25 +66,6 @@ app.post("/updateinfo", async (req, res) => {
     }
     if (bio !== undefined) {
       updateData.bio = bio;
-    }
-    const user = await UserModel.findOneAndUpdate({ username }, updateData, {
-      new: true,
-    });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-app.post("/deleteinfo", async (req, res) => {
-  const { username, type } = req.body;
-  try {
-    const updateData = {};
-    if (type === "profession") {
-      updateData.profession = "";
-      updateData.interests = [];
-    } else if (type === "bio") {
-      updateData.bio = "";
     }
     const user = await UserModel.findOneAndUpdate({ username }, updateData, {
       new: true,
