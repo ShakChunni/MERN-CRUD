@@ -9,7 +9,9 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [signupError, setSignupError] = useState("");
   const navigate = useNavigate();
+
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
   };
@@ -24,7 +26,11 @@ function Signup() {
       })
       .catch((error) => {
         console.log(error);
-        setSignupError("Signup failed. Please try again.");
+        if (error.response) {
+          setSignupError("Signup failed. Username & Email must be unique.");
+        } else {
+          setSignupError("Signup failed 404");
+        }
       });
   };
 
@@ -32,6 +38,9 @@ function Signup() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6">Signup</h1>
+        {signupError && (
+          <div className="text-red-500 text-center mb-4">{signupError}</div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-group">
             <label htmlFor="username" className="block text-gray-700">

@@ -8,6 +8,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
 
   const handlePasswordToggle = () => {
@@ -25,7 +26,17 @@ function Login() {
       localStorage.setItem("username", username);
       navigate("/dashboard");
     } catch (error) {
-      setLoginError("Login failed. Please check your username and password.");
+      if (error.response) {
+        if (error.response.status === 404) {
+          setLoginError("Username not found. Please check your username.");
+        } else if (error.response.status === 401) {
+          setLoginError("Incorrect password. Please check your password.");
+        } else {
+          setLoginError("Login failed");
+        }
+      } else {
+        setLoginError("Login failed");
+      }
       console.log(error);
     }
   };
@@ -34,6 +45,9 @@ function Login() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
+        {loginError && (
+          <div className="text-red-500 text-center mb-4">{loginError}</div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-group">
             <label htmlFor="username" className="block text-gray-700">
