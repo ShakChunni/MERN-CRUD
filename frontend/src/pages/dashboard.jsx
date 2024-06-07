@@ -35,7 +35,7 @@ function Dashboard() {
     bio: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(""); // "profession" or "bio"
+  const [modalType, setModalType] = useState("");
   const [newProfession, setNewProfession] = useState("");
   const [newInterests, setNewInterests] = useState([]);
   const [newBio, setNewBio] = useState("");
@@ -50,7 +50,6 @@ function Dashboard() {
       })
       .then((response) => {
         setUserInfo(response.data);
-        // Clear newInterests if newProfession changes
         if (newProfession !== response.data.profession) {
           setNewInterests([]);
         }
@@ -58,8 +57,7 @@ function Dashboard() {
       .catch((error) => {
         console.log(error);
       });
-  }, [newProfession]); // Listen for changes in newProfession
-  
+  }, [newProfession]);
 
   const handleUpdate = () => {
     const username = localStorage.getItem("username");
@@ -112,7 +110,6 @@ function Dashboard() {
     setModalType(type);
     if (type === "profession") {
       setNewProfession(userInfo.profession);
-      // Set interests to the user's existing interests
       setNewInterests(userInfo.interests);
     } else {
       setNewBio(userInfo.bio);
