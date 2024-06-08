@@ -45,7 +45,7 @@ function Dashboard() {
   useEffect(() => {
     const username = localStorage.getItem("username");
     axios
-      .get("https://mern-crud-backend-jojq.onrender.com/userinfo", {
+      .get("https://mern-crud-rouge.vercel.app/userinfo", {
         params: { username },
       })
       .then((response) => {
@@ -67,7 +67,7 @@ function Dashboard() {
         : { bio: newBio };
 
     axios
-      .post("https://mern-crud-backend-jojq.onrender.com/updateinfo", {
+      .post("https://mern-crud-rouge.vercel.app/updateinfo", {
         username,
         ...updateData,
       })
@@ -88,7 +88,7 @@ function Dashboard() {
         : { bio: "" };
 
     axios
-      .post("https://mern-crud-backend-jojq.onrender.com/updateinfo", {
+      .post("https://mern-crud-rouge.vercel.app/updateinfo", {
         username,
         ...deleteData,
       })

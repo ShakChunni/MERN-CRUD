@@ -19,7 +19,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://mern-crud-backend-jojq.onrender.com/signup", { username, email, password })
+      .post("https://mern-crud-rouge.vercel.app/signup", { username, email, password })
       .then((result) => {
         console.log(result);
         navigate("/login");
