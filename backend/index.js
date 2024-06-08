@@ -1,18 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
 
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-}
+const corsOptions = {
+  origin: '*', // Allow all origins (You can specify your frontend URL here)
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials (cookies)
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
 
-app.use(cors(corsOptions)) /
+app.use(cors(corsOptions));
 
 mongoose.connect(
   "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/?retryWrites=true&w=majority&appName=simple-project",
@@ -25,11 +25,10 @@ mongoose.connect(
 app.post("/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await UserModel.create({
       username,
       email,
-      password: hashedPassword,
+      password, // Storing the password directly without hashing
     });
     res.json(user);
   } catch (err) {
@@ -44,8 +43,8 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (passwordMatch) {
+    // Here you can perform a comparison between the stored password and the provided password
+    if (password === user.password) {
       res.json(user);
     } else {
       res.status(401).json({ error: "Invalid credentials" });
