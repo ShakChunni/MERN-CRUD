@@ -9,6 +9,7 @@ app.use(express.json());
 const corsOptions = {
   origin: "https://mern-crud-frontend-six.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credential: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
