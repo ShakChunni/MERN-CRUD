@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: '*', // Allow all origins
+  origin: "*", // Allow all origins
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, 
-  optionsSuccessStatus: 200
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -83,6 +83,14 @@ app.post("/updateinfo", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+// Serve the React application
+app.use(express.static(path.join(__dirname, "frontend", "build")));
+
+// For any other route, serve the React application
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;

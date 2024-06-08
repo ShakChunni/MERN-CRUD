@@ -18,6 +18,8 @@ This is a simple full-stack CRUD application where users can register, login, an
 
 ## Installation and Setup
 
+It is deployed at: [https://mern-crud-frontend-nu.vercel.app/](https://mern-crud-frontend-nu.vercel.app/)
+
 To clone the GitHub repository, use the following command:
 [git clone https://github.com/ShakChunni/MERN-CRUD.git](https://github.com/ShakChunni/MERN-CRUD.git)
 
