@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: '*', // Allow all origins (You can specify your frontend URL here)
+  origin: '*', // Allow all origins
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow credentials (cookies)
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+  credentials: true, 
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
@@ -43,7 +43,6 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    // Here you can perform a comparison between the stored password and the provided password
     if (password === user.password) {
       res.json(user);
     } else {
