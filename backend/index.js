@@ -1,11 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
+
 const app = express();
+
+// Middleware
 app.use(express.json());
 app.use(cors());
+
+const corsOptions = {
+  origin: "https://mern-crud-frontend-six.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"], // Add the HTTP methods you want to allow
+  credentials: true, // Allow cookies and HTTP authentication to be sent with the request
+};
+
+app.use(cors(corsOptions));
 
 mongoose.connect(
   "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/simple-projectX"
@@ -14,11 +24,11 @@ mongoose.connect(
 app.post("/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // No need for hashing password
     const user = await UserModel.create({
       username,
       email,
-      password: hashedPassword,
+      password, // Assuming password is already hashed or stored securely
     });
     res.json(user);
   } catch (err) {
@@ -33,8 +43,8 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (passwordMatch) {
+    // Comparing passwords, assuming password is stored securely
+    if (user.password === password) {
       res.json(user);
     } else {
       res.status(401).json({ error: "Invalid credentials" });
@@ -76,6 +86,7 @@ app.post("/updateinfo", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

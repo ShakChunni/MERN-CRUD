@@ -19,7 +19,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/signup", { username, email, password })
+      .post("https://mern-crud-backend-jojq.onrender.com/signup", { username, email, password })
       .then((result) => {
         console.log(result);
         navigate("/login");

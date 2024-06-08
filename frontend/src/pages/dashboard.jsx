@@ -45,7 +45,7 @@ function Dashboard() {
   useEffect(() => {
     const username = localStorage.getItem("username");
     axios
-      .get("http://localhost:5000/userinfo", {
+      .get("https://mern-crud-backend-jojq.onrender.com/userinfo", {
         params: { username },
       })
       .then((response) => {
@@ -67,7 +67,7 @@ function Dashboard() {
         : { bio: newBio };
 
     axios
-      .post("http://localhost:5000/updateinfo", {
+      .post("https://mern-crud-backend-jojq.onrender.com/updateinfo", {
         username,
         ...updateData,
       })
@@ -88,7 +88,7 @@ function Dashboard() {
         : { bio: "" };
 
     axios
-      .post("http://localhost:5000/updateinfo", {
+      .post("https://mern-crud-backend-jojq.onrender.com/updateinfo", {
         username,
         ...deleteData,
       })
