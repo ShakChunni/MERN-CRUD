@@ -5,14 +5,21 @@ const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+
+const allowedOrigins = ['https://example.com', 'https://anotherdomain.com'];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // Allow non-browser requests
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 mongoose.connect(
-  "mongodb+srv://<ashfaq1>:<ashfaq>@simple-project.km5b5xe.mongodb.net/?retryWrites=true&w=majority&appName=simple-project",
+  "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/?retryWrites=true&w=majority&appName=simple-project",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
