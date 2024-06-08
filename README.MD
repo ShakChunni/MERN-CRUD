@@ -16,10 +16,6 @@ This is a simple full-stack CRUD application where users can register, login, an
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
-## Deployment
-
-The application is deployed and can be accessed at: [https://mern-crud-frontend-six.vercel.app/](https://mern-crud-frontend-six.vercel.app/)
-
 ## Installation and Setup
 
 To clone the GitHub repository, use the following command:
