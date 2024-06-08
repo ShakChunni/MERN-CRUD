@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://mern-crud.vercel.app"],
+    origin: ["https://mern-crud-sooty.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true,
   })
