@@ -6,14 +6,13 @@ const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
 // Middleware
-const corsOptions = {
-  origin: "https://mern-crud-frontend-six.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credential: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-app.use(cors(corsOptions));
-app.use(express.json());
+app.use(
+  cors({
+    origin: "https://mern-crud-sooty.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 // Connect to MongoDB
 mongoose.connect(
