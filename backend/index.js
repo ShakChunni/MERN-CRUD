@@ -5,10 +5,18 @@ const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 mongoose.connect(
-  "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/simple-projectX"
+  "mongodb+srv://<ashfaq1>:<ashfaq>@simple-project.km5b5xe.mongodb.net/?retryWrites=true&w=majority&appName=simple-project",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
 );
 
 app.post("/signup", async (req, res) => {
@@ -76,6 +84,7 @@ app.post("/updateinfo", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
