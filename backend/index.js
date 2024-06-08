@@ -5,11 +5,21 @@ const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://mern-crud.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 mongoose.connect(
   "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/simple-projectX"
 );
+
+app.get("/", (req, res) => {
+  res.json("Hello World!");
+});
 
 app.post("/signup", async (req, res) => {
   try {
