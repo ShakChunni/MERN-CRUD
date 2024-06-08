@@ -5,11 +5,22 @@ const bcrypt = require("bcrypt");
 const UserModel = require("./models/User");
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'https://mern-crud-frontend-six.vercel.app' }));
+// Middleware
+const corsOptions = {
+  origin: "https://mern-crud-frontend-six.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+app.use(express.json());
 
-
+// Connect to MongoDB
 mongoose.connect(
-  "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/simple-projectX"
+  "mongodb+srv://ashfaq1:ashfaq@simple-project.km5b5xe.mongodb.net/simple-projectX",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
 );
 
 app.get("/", (req, res) => {
