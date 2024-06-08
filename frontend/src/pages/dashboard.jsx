@@ -45,7 +45,7 @@ function Dashboard() {
   useEffect(() => {
     const username = localStorage.getItem("username");
     axios
-      .get("https://mern-crud-sooty.vercel.app/userinfo", {
+      .get("http://localhost:5000/userinfo", {
         params: { username },
       })
       .then((response) => {
@@ -67,7 +67,7 @@ function Dashboard() {
         : { bio: newBio };
 
     axios
-      .post("https://mern-crud-sooty.vercel.app/updateinfo", {
+      .post("http://localhost:5000/updateinfo", {
         username,
         ...updateData,
       })
@@ -88,7 +88,7 @@ function Dashboard() {
         : { bio: "" };
 
     axios
-      .post("https://mern-crud-sooty.vercel.app/updateinfo", {
+      .post("http://localhost:5000/updateinfo", {
         username,
         ...deleteData,
       })

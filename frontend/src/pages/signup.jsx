@@ -19,7 +19,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://mern-crud-sooty.vercel.app/signup", { username, email, password })
+      .post("http://localhost:5000/signup", { username, email, password })
       .then((result) => {
         console.log(result);
         navigate("/login");
